@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const socket = require("socket.io");
+const authRoutes = require("./routes/auth");
+const messageRoutes = require("./routes/messages");
 
 const app = express();
 app.use(cors());
@@ -17,6 +19,9 @@ mongoose
   .catch((err) => {
     console.log("errrr=>", err);
   });
+
+app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
 
 var PORT = process.env.PORT || 5000;
 
